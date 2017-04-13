@@ -1,34 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class  Content extends Component {
+const Content = ({title, gamelist, addGameToList}) => {
 
-	addGame({target}) {
-		const newGameName = target.previousElementSibling.value;
+	let gamelistJSX = gamelist.map((value, i) => {
+		return <li key={i}> {value} </li>
+	});
 
-  	const {dispatch} = this.props;
-		dispatch({
-			type : "ADD_GAME",
-			value : newGameName
-		})
-	}
+  return (
+    <div>
+    	<p> {title} </p>
+    	<div>
+      	<input type="text" />
+      	<button onClick={addGameToList}>추가</button>
+      	<ul>{gamelistJSX}</ul>
+    	</div>
+    </div>
+  );
 
-  render() {
-  	let {title, gamelist} = this.props;
-  	let gamelistJSX = gamelist.map((value, i) => {
-  		return <li key={i}> {value} </li>
-  	});
-
-    return (
-      <div>
-      	<p> {title} </p>
-      	<div>
-	      	<input type="text" />
-	      	<button onClick={this.addGame.bind(this)}>추가</button>
-	      	<ul>{gamelistJSX}</ul>
-      	</div>
-      </div>
-    );
-  }
 }
 
 export default Content ;
